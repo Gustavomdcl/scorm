@@ -4,3 +4,7 @@ CLEAN FILES:
 	https://scorm.com/scorm-explained/technical-scorm/content-packaging/xml-schema-definition-files/
 EXAMPLES: 
 	https://scorm.com/scorm-explained/technical-scorm/golf-examples/
+
+
+
+	https://ciatech.com.br/padrao-scorm/?gclid=EAIaIQobChMI98eZiPPD5AIVTICRCh11VgJvEAAYASAAEgJMmfD_BwE
