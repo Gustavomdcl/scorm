@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<content>
+	<globalProperties>
+		<externalMetadata>
+			<source>ADL</source>
+			<model>ADL SCORM 1.1</model>
+			<location><![CDATA[metadata(1.1).xml]]></location>
+		</externalMetadata>
+	</globalProperties>
+	<block id="B1">
+		<identification>
+			<title>TITLE</title>
+			<description>DESCRIPTION</description>
+			<labels>
+				<curricular>COURSE</curricular>
+			</labels>
+		</identification>
+		<sco id="S1">
+			<identification>
+			<title>TITLE</title>
+			<description>DESCRIPTION</description>
+				<labels>
+					<curricular>SCO</curricular>
+				</labels>
+			</identification>
+			<launch>
+				<location><![CDATA[index.html]]></location>
+			</launch>
+		</sco>
+	</block>
+</content>
