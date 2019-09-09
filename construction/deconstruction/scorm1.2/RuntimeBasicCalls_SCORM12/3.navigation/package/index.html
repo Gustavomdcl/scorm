@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>COURSE TITLE - UNITY TITLE</title>
+    <meta charset="UTF-8">
+    <script src="scormfunctions.js"></script>
+    <script type="text/javascript">
+        //INIT SETUP ==========
+            var startTime = null;
+
+        //NAVIGATION SETUP ==========
+            
+            function Start(){
+                ScormProcessInitialize();
+                alert(ScormProcessGetValue("cmi.core.lesson_location"));
+                alert(ScormProcessGetValue("cmi.core.lesson_status"));
+                alert(ScormProcessGetValue("cmi.core.session_time"));
+            }
+
+            function StartTimer(){
+                startTime = new Date();
+            }
+            
+            function StopTimer(){
+                var stopTime = new Date();
+                var totalMilliseconds = (stopTime.getTime() - startTime.getTime());
+                var scormTime = ConvertMilliSecondsToSCORMTime(totalMilliseconds, false);
+                
+                ScormProcessSetValue("cmi.core.session_time", scormTime);
+            }
+
+            function Location(location){
+                ScormProcessSetValue("cmi.core.lesson_location", location);
+            }
+
+            function Status(status){
+                ScormProcessSetValue("cmi.core.lesson_status", status);
+            }
+
+            function Finish(finish){
+                ScormProcessSetValue("cmi.core.exit", finish);
+                ScormProcessFinish();
+            }
+        //SCORM TIMER ==========
+            function ConvertMilliSecondsToSCORMTime(intTotalMilliseconds, blnIncludeFraction){
+        	    var intHours;
+        	    var intintMinutes;
+        	    var intSeconds;
+        	    var intMilliseconds;
+        	    var intHundredths;
+        	    var strCMITimeSpan;
+        	    if (blnIncludeFraction == null || blnIncludeFraction == undefined){
+        		    blnIncludeFraction = true;
+        	    }
+        	    intMilliseconds = intTotalMilliseconds % 1000;
+        	    intSeconds = ((intTotalMilliseconds - intMilliseconds) / 1000) % 60;
+        	    intMinutes = ((intTotalMilliseconds - intMilliseconds - (intSeconds * 1000)) / 60000) % 60;
+        	    intHours = (intTotalMilliseconds - intMilliseconds - (intSeconds * 1000) - (intMinutes * 60000)) / 3600000;
+        	    if (intHours == 10000){	
+        		    intHours = 9999;
+        		    intMinutes = (intTotalMilliseconds - (intHours * 3600000)) / 60000;
+        		    if (intMinutes == 100){
+        			    intMinutes = 99;
+        		    }
+        		    intMinutes = Math.floor(intMinutes);
+        		    intSeconds = (intTotalMilliseconds - (intHours * 3600000) - (intMinutes * 60000)) / 1000;
+        		    if (intSeconds == 100){
+        			    intSeconds = 99;
+        		    }
+        		    intSeconds = Math.floor(intSeconds);
+        		    intMilliseconds = (intTotalMilliseconds - (intHours * 3600000) - (intMinutes * 60000) - (intSeconds * 1000));
+        	    }
+        	    intHundredths = Math.floor(intMilliseconds / 10);
+        	    strCMITimeSpan = ZeroPad(intHours, 4) + ":" + ZeroPad(intMinutes, 2) + ":" + ZeroPad(intSeconds, 2);
+        	    if (blnIncludeFraction){
+        		    strCMITimeSpan += "." + intHundredths;
+        	    }
+        	    if (intHours > 9999){
+        		    strCMITimeSpan = "9999:99:99";
+        		    if (blnIncludeFraction){
+        			    strCMITimeSpan += ".99";
+        		    }
+        	    }
+        	    return strCMITimeSpan;
+            	
+            }
+            function ZeroPad(intNum, intNumDigits){
+        	    var strTemp;
+        	    var intLen;
+        	    var i;
+        	    strTemp = new String(intNum);
+        	    intLen = strTemp.length;
+        	    if (intLen > intNumDigits){
+        		    strTemp = strTemp.substr(0,intNumDigits);
+        	    }
+        	    else{
+        		    for (i=intLen; i<intNumDigits; i++){
+        			    strTemp = "0" + strTemp;
+        		    }
+        	    }
+        	    return strTemp;
+            }
+    </script>
+</head>
+<body>
+    <input type="button" value="Start" onclick="Start();"/><br>
+
+    <input type="button" value="Start Timer" onclick="StartTimer();"/>
+    <input type="button" value="Stop Timer" onclick="StopTimer();"/><br>
+
+    <input type="button" value="Page 0" onclick="Location(0);"/>
+    <input type="button" value="Page 10" onclick="Location(10);"/><br>
+
+    <input type="button" value="Not Attempted" onclick="Status('not attempted');"/>
+    <input type="button" value="Incomplete" onclick="Status('incomplete');"/>
+    <input type="button" value="Completed" onclick="Status('completed');"/>
+    <input type="button" value="Passed" onclick="Status('passed');"/>
+    <input type="button" value="Failed" onclick="Status('failed');"/><br>
+
+    <input type="button" value="Finish Suspended" onclick="Finish('suspend');"/>
+    <input type="button" value="Finish Normal" onclick="Finish('');"/>
+</body>
+</html>
