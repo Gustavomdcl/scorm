@@ -1,0 +1,6 @@
+GERAL: 
+	https://scorm.com/scorm-explained/technical-scorm/content-packaging/
+CLEAN FILES: 
+	https://scorm.com/scorm-explained/technical-scorm/content-packaging/xml-schema-definition-files/
+EXAMPLES: 
+	https://scorm.com/scorm-explained/technical-scorm/golf-examples/
