@@ -12,11 +12,11 @@
             
             function Start(){
                 ScormProcessInitialize();
-                console.log(ScormProcessGetValue("cmi.core.lesson_location"));
-                console.log(ScormProcessGetValue("cmi.core.lesson_status"));
-                console.log(ScormProcessGetValue("cmi.core.score.raw"));
-                console.log(ScormProcessGetValue("cmi.core.score.min"));
-                console.log(ScormProcessGetValue("cmi.core.score.max"));
+                console.log("cmi.core.lesson_location",ScormProcessGetValue("cmi.core.lesson_location"));
+                console.log("cmi.core.lesson_status",ScormProcessGetValue("cmi.core.lesson_status"));
+                console.log("cmi.core.score.raw",ScormProcessGetValue("cmi.core.score.raw"));
+                console.log("cmi.core.score.min",ScormProcessGetValue("cmi.core.score.min"));
+                console.log("cmi.core.score.max",ScormProcessGetValue("cmi.core.score.max"));
             }
 
             function StartTimer(){
