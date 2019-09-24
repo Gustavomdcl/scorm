@@ -1,0 +1,7 @@
+COURSE = "Título do Curso"
+UNITY = "Título da Unidade"
+SCORM = "1.2"
+LANG = "pt_br"
+THEME = "dark"
+TOTAL_NAGIVATION = "true"
+MENU_SEARCH = "true"
